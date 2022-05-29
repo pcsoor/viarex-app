@@ -1,0 +1,22 @@
+<br>
+<br>
+<%= simple_form_for @order_item, url: orders_path, remote: true do |o| %>
+  <%= o.input :quantity, label: "Quantity" %>
+  <%= o.input :notice, label: "Note" %>
+  <%= o.input :description, label: "Description" %>
+
+  <%= o.simple_fields_for :boards do |b| %>
+    <%= b.association :board_type, label: "Board Type", :label_method => :label %>
+    <%= b.association :banding_long_1, label: "Banding long 1", :label_method => :label %>
+    <%= b.association :banding_long_2, label: "Banding long 2", :label_method => :label %>
+    <%= b.association :banding_short_1, label: "Banding short 1", :label_method => :label %>
+    <%= b.association :banding_short_2, label: "Banding short 2", :label_method => :label %>
+    <%= b.input :vein, as: :boolean, label: "Vein" %>
+    <%= b.input :width, label: "Width" %>
+    <%= b.input :length, label: "Length" %>
+  <% end %>
+
+  <%= o.submit "Add to order list" %>
+<% end %>
+
+<div class="order_items_list"></div>
