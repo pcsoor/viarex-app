@@ -1,0 +1,8 @@
+<% if @order_item.errors.any? %>
+  document.querySelector('#error_messages') ? document.querySelector('#error_messages').remove() : null;
+  document.querySelector('#order_item_form').insertAdjacentHTML('afterbegin', '<%= escape_javascript(render "shared/error_messages", object: @order_item) %>');
+<% else %>
+  document.querySelector('#error_messages') ? document.querySelector('#error_messages').remove() : null ;
+  document.querySelector('#order_items').insertAdjacentHTML('afterbegin', '<%= escape_javascript render @order_item %>')
+  document.querySelector('#order_item_form').reset();
+<% end %>

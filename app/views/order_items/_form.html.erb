@@ -1,0 +1,62 @@
+<%= simple_form_for @order_item, html: {id: "order_item_form", class: "mx-auto card p-3 bg-light"}, remote: true do |o| %>
+
+  <%= render "shared/error_messages", object: o.object %>
+
+  <%= o.simple_fields_for :board do |b| %>
+    <div class="row">
+      <div class="col-lg-4 mb-3">
+        <%= b.association :board_type, label: "Board Type", :label_method => :label, input_html: {class:"form-select"} %>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <%= b.association :banding_long_1, label: "Banding long 1", :label_method => :label, input_html: {class:"form-select"} %>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <%= b.association :banding_long_2, label: "Banding long 2", :label_method => :label, input_html: {class:"form-select"} %>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4 mb-3">
+        <%= b.association :banding_short_1, label: "Banding short 1", :label_method => :label, input_html: {class:"form-select"} %>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <%= b.association :banding_short_2, label: "Banding short 2", :label_method => :label, input_html: {class:"form-select"} %>
+      </div>
+      <div class="col-lg-4 mb-3">
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 mb-3">
+        <%= b.input :width, label: "Width" %>
+      </div>
+      <div class="col-lg-3 mb-3">
+        <%= b.input :length, label: "Length" %>
+      </div>
+      <div class="col-lg-3 mb-3">
+        <%= o.input :quantity, label: "Quantity", input_html: { min: 1, value: 1 } %>
+      </div>
+      <div class="col-lg-3 mb-3">
+        <%= b.label :vein %>
+        <%= b.input :vein, as: :boolean, label: "Vein" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col mb-3">
+      <%= o.input :notice, label: "Note" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mb-3">
+      <%= o.input :description, label: "Description" %>
+    </div>
+  </div>
+
+  <div>
+    <%= o.submit button_name, class: "btn btn-primary btn-block" %>
+  </div>
+<% end %>

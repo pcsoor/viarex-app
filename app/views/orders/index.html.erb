@@ -1,0 +1,32 @@
+<div class="row mb-5">
+  <h4>Függőben lévő rendelések</h4>
+  <hr>
+
+  <% if @draft_order.nil? %>
+    <i>Önnek jelenleg nincs függőben lévő rendelése. Rendeljen innen: <%= link_to "rendelés", new_order_item_path %></i>
+  <% else %>
+
+  <% if @draft_order.order_items.any? %>
+    <i class="mb-3"><%= "A rendelés összesen #{@draft_order.order_items.count} db tételt tartalmaz. " %></i>
+    <%= link_to "Rendelés tartalma", @draft_order %>
+    <%= link_to "Vásárlás folytatása", new_order_item_path %>
+  <% else %>
+    <i>Nincs tétel a rendelésben. Rendeljen innen: <%= link_to "rendelés", new_order_item_path %></i>
+  <% end %>
+
+  <% end %>
+</div>
+
+<div class="row">
+  <h4>Leadott megrendelések</h4>
+  <hr>
+  <% if @delivered_orders.any? %>
+    <% @delivered_orders.order("ordered_at desc").each do |delivered| %>
+      <p>Rendelés dátuma: <strong><%= delivered.ordered_at.strftime("%Y-%m-%d %H:%M") %></strong> - <%= link_to "Részletek", delivered %></p>
+
+    <% end %>
+  <% else %>
+    <i>Önnek még nincs leadott rendelése.</i>
+  <% end %>
+</div>
+

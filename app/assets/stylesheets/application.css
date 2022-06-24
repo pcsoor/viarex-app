@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url('SourceSansPro-Regular.ttf');
+}
+
+body {
+    font-family: "SourceSansPro"!important;
+}

@@ -1,0 +1,19 @@
+<div id="error_messages"></div>
+  <div class="row">
+    <%= render "form", button_name: "Hozzáadás a rendelési listához" %>
+  </div>
+
+  <div class="row mt-4">
+    <h3>Rendelési lista</h3>
+    <hr>
+
+    <div id="order_items">
+      <% @order.order_items.order("id desc").each do |item| %>
+        <%= render partial: "order_items/order_item", locals: {order_item: item} %>
+      <% end %>
+
+      <%= button_to orders_submit_path, class: "btn btn-success mt-2 mb-5", html: { data: "Biztosan leadja a rendelést?" } do %>
+        <i class="fa-solid fa-share"></i> Lista végleges leadása
+      <% end %>
+    </div>
+  </div>

@@ -1,0 +1,38 @@
+<% @order.order_items.each_with_index do |order_item, index| %>
+  <div style=<% if index % 2 != 0 %>"background-color: #f1f1f1"<% end %>>
+    <div class="p-3">
+      <h5><%= "#{index+1} - #{order_item.board.board_type.label}" %></h5>
+      <div class="row">
+        <div class="col-md-6">
+          <ul>
+            <li>Élzárás hosszú 1: <%= "#{order_item.board.banding_long_1.label}" %></li>
+            <li>Élzárás hosszú 2: <%= "#{order_item.board.banding_long_2.label}" %></li>
+            <li>Élzárás rövid 1: <%= "#{order_item.board.banding_short_1.label}" %></li>
+            <li>Élzárás rövid 2: <%= "#{order_item.board.banding_short_2.label}" %></li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <ul>
+            <li>Hosszúság: <%= order_item.board.width.nil? ? "-" : order_item.board.width %></li>
+            <li>Szélesség: <%= order_item.board.length.nil? ? "-" : order_item.board.length %></li>
+            <li>Erezettség: <%= order_item.board.vein ? "Igen" : "Nem" %></li>
+            <li>Mennyiség: <%= order_item.quantity.nil? ? "-" : order_item.quantity %></li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <p>Megjegyzés:</p>
+            <p><%= order_item.notice.empty? ? "Nincs megjegyzés" : order_item.notice   %></p>
+          </div>
+          <div class="col-lg-6">
+            <p>Leírás:</p>
+            <p><%= order_item.description.empty? ? "Nincs leírás" : order_item.description %></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<% end %>

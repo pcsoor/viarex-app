@@ -1,0 +1,17 @@
+<div class="mt-5">
+  <h2 class="text-center"><%= t "forgot_password_label" %></h2>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "form-control mx-auto", style: "max-width: 500px" }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field mb-2">
+      <%= f.label :email, class: "form-label fw-bold" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    </div>
+
+    <div class="actions my-3">
+      <%= f.submit "Küldés", class: "btn btn-primary w-100" %>
+    </div>
+    <%= render "devise/shared/links" %>
+  <% end %>
+</div>

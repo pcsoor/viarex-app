@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col">
+      <h5><%= "#{order_item.board.board_type.label}" %></h5>
+      <div class="row">
+        <div class="col-md-6">
+          <ul>
+            <li>Élzárás hosszú 1: <%= "#{order_item.board.banding_long_1.label}" %></li>
+            <li>Élzárás hosszú 2: <%= "#{order_item.board.banding_long_2.label}" %></li>
+            <li>Élzárás rövid 1: <%= "#{order_item.board.banding_short_1.label}" %></li>
+            <li>Élzárás rövid 2: <%= "#{order_item.board.banding_short_2.label}" %></li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <ul>
+            <li>Hosszúság: <%= "#{order_item.board.width}" %></li>
+            <li>Szélesség: <%= "#{order_item.board.length}" %></li>
+            <li>Erezettség: <%= order_item.board.vein ? "Igen" : "Nem" %></li>
+            <li>Mennyiség: <%= "#{order_item.quantity}" %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= link_to "Szerkesztés", edit_order_item_path(order_item), class: "pl-2" %>
+          <%= link_to "Törlés", order_item, method: :delete, data: { confirm: 'Biztos benne?' }, class: "text-danger px-3" %>
+        </div>
+      </div>
+    <hr>
+  </div>
+</div>

@@ -1,38 +1,35 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_order, only: [:show]
+
   def index
+    @draft_order = current_user.orders.find_by(active: true)
+    @delivered_orders = current_user.orders.where(status: Order.statuses[:delivered])
   end
 
-  def new
-    @order_item = current_order.order_items.new
-    @order_item.boards.new
+  def show
   end
 
-  def create
-    @order = current_order
-    @order_item = @order.order_items.new(order_params)
+  def submit
+    @order = active_order
+    Time.zone = "Budapest"
 
-    respond_to do |format|
-      if @order_item.save
-        format.html { redirect_to "/orders/new" }
-        format.js
+    if @order.order_items.count > 0
+      if @order.update(status: Order.statuses[:delivered], ordered_at: DateTime.now.in_time_zone, active: false)
+        flash[:success] = "Rendelés sikeresen leadva!"
+        redirect_to action: "index"
       else
-        format.html do
-          render "new"
-        end
-        format.json do
-          render json: @order_item.errors
-        end
+        redirect_to new_order_item_path, notice: orders.errors.full_messages
       end
+    else
+      flash[:error] = "Nincs tétel a listában!"
+      redirect_to new_order_item_path
     end
-    session[:order_id] = @order.id
   end
 
   private
 
-  def order_params
-    params.require(:order_item).permit(:id, :quantity, :notice, :description,
-                                  :boards_attributes => [:id, :board_type_id, :banding_long_1_id, :banding_long_2_id,
-                                                         :banding_short_1_id, :banding_short_2_id,
-                                                         :vein, :length, :width])
+  def set_order
+    @order = Order.find_by(id: params[:id])
   end
 end

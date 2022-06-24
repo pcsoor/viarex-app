@@ -1,0 +1,12 @@
+<footer class=" py-3 my-4 border-top">
+  <div class="container d-lg-flex flex-wrap justify-content-between align-items-center text-center text-lg-start">
+    <p class="col-lg-4 mb-0 text-muted">© 2022 Viarex Kft.</p>
+
+    <%= link_to image_tag("viarex_logo.png", style: "width:120px;"), root_path, class: "col-lg-4 d-flex justify-content-center my-3 mb-md-0 me-md-auto" %>
+
+    <ul class="nav col-lg-4 d-flex justify-content-lg-end justify-content-center">
+      <li class="nav-item"><%= link_to "Kezdőlap", root_path, class: "nav-link px-2 text-muted" %></li>
+      <li class="nav-item"><%= link_to "Rendelés", new_order_item_path, class: "nav-link px-2 text-muted" %></li>
+    </ul>
+  </div>
+</footer>
